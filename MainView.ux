@@ -1,0 +1,59 @@
+<App>
+<Page Name="newPage" Background="#155565">
+
+	<JavaScript> 	
+			
+			var Observable = require("FuseJS/Observable");
+			var displayText = Observable("Waiting for data.."); // on data received this text will be changed
+			var sendText = Observable("");
+			var io=require("Modules/socket.io.2.0.js");
+			 
+			var socket =io.connect('ws://yourdomain_or_IP:3000', { "forceBase64" : 1 });
+			socket.on('connect', function () { 
+				console.log("socket connected"); 
+				 
+
+			});
+ 
+			// on received "text"
+			socket.on('text', function (text) { 
+ 				//print received data in console log	
+ 				console.log(text); 				
+ 				// add received text to Observable variable
+ 				displayText.value = text; 				  
+ 			});	
+
+			// Emit function - send some data to server
+ 			function emitData(){
+ 				socket.emit('textemit', "" + sendText);	// add "" to makes sure that is not sent as a object
+				console.log("Emited data: " + sendText);
+ 			};		  
+			
+			module.exports = {
+			 // display text observable
+			displayText: displayText,
+			// emit function
+			emitData: emitData,
+			// input text field
+			sendText: sendText
+			 
+			}; 
+
+			</JavaScript>
+
+			<DockPanel>										
+				<StackPanel Dock="Top" Alignment="Top" Height="56" Width="100%" Margin="10">
+					<Text Alignment="Center" FontSize="18" Color="#fff">{displayText}</Text>									 
+				</StackPanel> 
+
+				<StackPanel Dock="Top" Alignment="Top" Height="56" Width="100%" Margin="10">
+					<TextInput PlaceholderText="Enter some text" PlaceholderColor="#ccc" Margin="10,0,10,0" Padding="5,0,0,0" TextColor="#fff" CaretColor="#fff" Value="{sendText}"/>
+					<Rectangle Alignment="Bottom" Margin="10" Height="1" Color="#fff"/>
+					<Button Text="Send some data" Opacity="1" Width="200" Height="30" Color="#446178" Clicked="{emitData}"/>									 
+				</StackPanel>
+
+
+ 			</DockPanel>
+
+</Page>
+</App>
