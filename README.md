@@ -1,6 +1,6 @@
 # Fuse-socket.io
 Fusetools and Socket.io implementation
-Build Status
+
 # Fuse App example. 
  - Socket.io library version 2.0.0
  - Fuse version 1.2.1
