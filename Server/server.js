@@ -12,7 +12,7 @@ Version: 1.0.1
 var server = require('http').createServer();
 var io = require('socket.io')(server);
 var receivedMsg = "";
-console.log('Server started. Listening on port: 3233');
+console.log('Server started. Listening on port: 3000');
 io.sockets.on('connection', function (socket) {
     console.log('socket connected');
 
