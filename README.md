@@ -7,4 +7,5 @@ Fusetools and Socket.io implementation
  
  # Simple NodeJS socket.io server
  Check Server folder
+ NOTE: Exclute Server folder from Fuse app. It is ment to be used on NodeJS server. 
  
